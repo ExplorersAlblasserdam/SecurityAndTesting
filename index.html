@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Sandbox</title>
+    <style>
+        :root { --bg: #ffffff; --text: #1a1a1a; }
+        [data-theme="dark"] { --bg: #0f172a; --text: #f8fafc; }
+        
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; transition: 0.3s; padding: 2rem; }
+        .card { border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px; }
+        button { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px; }
+        input { padding: 0.5rem; width: 100%; max-width: 300px; margin-bottom: 1rem; display: block; }
+    </style>
+</head>
+<body>
 
+    <h1>Sandbox</h1>
+    
+    <!-- TEST 1: Dark Mode Toggle -->
+    <div class="card">
+        <h3>1. UI Experiment: Dark Mode</h3>
+        <button onclick="toggleTheme()">Wissel Thema</button>
+    </div>
+
+    <!-- TEST 2: Interactief Contactformulier -->
+    <div class="card">
+        <h3>2. Formulier</h3>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Naam" required>
+            <input type="email" id="email" placeholder="E-mail" required>
+            <button type="submit">Verstuur Data</button>
+        </form>
+        <p id="formFeedback"></p>
+    </div>
+
+    <script>
+        // 1. Dark Mode Logica met LocalStorage
+        const toggleTheme = () => {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        // 2. Formulier Validatie (Input Sanitization)
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.replace(/<[^>]*>?/gm, ''); // Basis XSS filter
+            document.getElementById('formFeedback').innerText = `Bedankt, ${name}! Je data is verwerkt.`;
+        });
+
+        // Bij opstarten: check opgeslagen thema
+        if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    </script>
+</body>
+</html>
