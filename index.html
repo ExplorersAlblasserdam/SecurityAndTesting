@@ -6,59 +6,102 @@
     <title>Explorers Alblasserdam - Home</title>
     <style>
         /* ALGEMENE STIJL */
-        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; scroll-behavior: smooth; }
+        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; scroll-behavior: smooth; background-color: #fcfcfc; }
         
         /* NAVIGATIE */
         nav { background: #077840; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
         nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
 
-        /* 1. WELKOM SECTIE (5 FOTO'S) */
-        .welcome-section {
-            position: relative; height: 70vh; display: flex; align-items: center; justify-content: center;
-            overflow: hidden; color: white; text-align: center;
-        }
-        .bg-slider {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            background-size: cover; background-position: center;
-            animation: backgroundRotate 25s infinite;
-        }
+        /* 1. SLIDESHOW */
+        .welcome-section { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden; color: white; text-align: center; }
+        .bg-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-size: cover; background-position: center; animation: backgroundRotate 25s infinite; }
         .welcome-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2; }
         .welcome-content { position: relative; z-index: 3; }
         .welcome-content h1 { font-size: 3em; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
         @keyframes backgroundRotate {
-            0%, 18% { background-image: url('foto1.jpg'); }
-            20%, 38% { background-image: url('foto2.jpg'); }
-            40%, 58% { background-image: url('foto3.jpg'); }
-            60%, 78% { background-image: url('foto4.jpg'); }
-            80%, 98% { background-image: url('foto5.jpg'); }
-            100% { background-image: url('foto1.jpg'); }
+            0%, 18% { background-image: url('https://www.scoutingpolaris.nl/images/phocagallery/Groepsactiviteiten/2019/2019bruglindegracht/2019-09-07%2014.07.46.jpg'); }
+            20%, 38% { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNujjk3tR97FzmDg_76Tpx8_tyAYbIpNeMA&s'); }
+            40%, 100% { background-image: url('https://www.scoutingpolaris.nl/images/phocagallery/Groepsactiviteiten/2019/2019bruglindegracht/2019-09-07%2014.07.46.jpg'); }
         }
 
-        /* SECTIES */
-        section { padding: 60px 20px; text-align: center; }
-        .grey-bg { background: #f4f4f4; }
-
         /* 2. DONATIE BALK */
-        .donation-bar { padding: 50px 20px; border-top: 5px solid #077840; border-bottom: 5px solid #077840; background: white; }
+        .donation-bar { background-color: #ffffff; padding: 50px 20px; text-align: center; border-top: 5px solid #077840; border-bottom: 1px solid #eee; }
         .donate-btn { background-color: #077840; color: white !important; padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; }
 
-        /* 3. ACTIE GEDEELTE (KLUSJES) */
-        .page-section { display: none; background: white; max-width: 600px; margin: 20px auto; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        .page-section.active { display: block; }
-        .grid-buttons { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
-        .klus-btn { border: 2px solid #eee; padding: 20px; rounded: 15px; font-weight: bold; cursor: pointer; text-align: left; background: white; border-radius: 15px; font-size: 1.1em; }
-        .klus-btn:hover { background: #f0fff4; border-color: #077840; }
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
-        .btn-green { background: #077840; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1em; }
+        /* 3. ONZE ACTIES SECTIE (SCREENSHOT STIJL) */
+        .onze-acties-container { padding: 60px 20px; text-align: center; }
+        .onze-acties-title { color: #077840; font-size: 2em; font-weight: 900; margin-bottom: 40px; text-transform: uppercase; }
+        
+        .actie-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+
+        /* De Card uit de screenshot */
+        .actie-card { 
+            background: white; 
+            width: 350px; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-align: left;
+        }
+        .actie-header { 
+            background: #ff7d31; 
+            padding: 12px; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 0.8em; 
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .actie-body { padding: 30px; }
+        .actie-body h3 { margin: 0 0 15px 0; font-size: 1.4em; display: flex; align-items: center; gap: 10px; }
+        .actie-body p { color: #666; font-size: 0.95em; line-height: 1.5; margin-bottom: 25px; }
+        
+        .aanmeld-btn { 
+            background: #1b5e20; 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            width: 100%; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        .aanmeld-btn:hover { background: #144618; }
+
+        /* Placeholder voor nieuwe acties */
+        .actie-placeholder {
+            width: 350px;
+            border: 3px dashed #eee;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-weight: bold;
+            text-align: center;
+            min-height: 300px;
+        }
+
+        /* 4. HET FORMULIER (STANDAARD VERBORGEN) */
+        #klusjes-formulier { display: none; padding: 60px 20px; background: #f9f9f9; }
+        .form-card { max-width: 600px; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .form-page { display: none; }
+        .form-page.active { display: block; }
+        input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #f0f0f0; border-radius: 10px; box-sizing: border-box; }
+        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="#home">Home</a>
-        <a href="#over-ons">Over Ons</a>
-        <a href="#actie">Klusjesdag Actie</a>
+        <a href="#acties">Acties</a>
+        <a href="https://scoutingalblasserdam.nl" target="_blank">Scouting Site</a>
     </nav>
 
     <div id="home">
@@ -71,81 +114,79 @@
             </div>
         </section>
 
-        <section>
-            <h2>Wie zijn wij?</h2>
-            <p>Wij zijn de Explorers van Scouting Alblasserdam. Een enthousiaste groep die elke week samenkomt voor avontuur.</p>
-            <a href="#over-ons" style="color: #077840; font-weight: bold;">Lees meer over onze groep →</a>
-        </section>
-
         <section class="donation-bar">
             <h2>Steun onze Expedities</h2>
             <a href="https://scoutingalblasserdam.nl" class="donate-btn">Nu Doneren</a>
         </section>
     </div>
 
-    <section id="over-ons" class="grey-bg">
-        <h2>Over de Explorers</h2>
-        <div style="max-width: 800px; margin: auto; text-align: left;">
-            <p>Wij zijn de explorers van scouting alblasserdam wij zijn een grote groep met jongens en meiden van 15 tot 18 jaar. Bij ons draait het om zelfstandigheid en gezelligheid.</p>
-            <p>We maken onze eigen programma's, van uitdagende hikes tot gezellige kampvuren en internationale zomerkampen.</p>
+    <!-- ONZE ACTIES SECTIE -->
+    <section id="acties" class="onze-acties-container">
+        <h2 class="onze-acties-title">Onze Acties</h2>
+        <div class="actie-grid">
+            
+            <!-- Klusjesactie Card (Exacte Screenshot look) -->
+            <div class="actie-card">
+                <div class="actie-header">Zomerkamp Denemarken DK</div>
+                <div class="actie-body">
+                    <h3>⚙️ Klusjesactie 2026</h3>
+                    <p>Hulp nodig in de tuin of bij de schoonmaak? De Explorers steken graag de handen uit de mouwen!</p>
+                    <button onclick="openFormulier()" class="aanmeld-btn">Klusje Aanmelden</button>
+                </div>
+            </div>
+
+            <!-- Binnenkort Placeholder -->
+            <div class="actie-placeholder">
+                <div>BINNENKORT:<br>NIEUWE ACTIES</div>
+            </div>
         </div>
     </section>
 
-    <section id="actie">
-        <h2 style="color: #077840;">Denemarken Klusjesdag Actie</h2>
-        <form id="klusForm" action="JOUW_URL" method="POST">
-            <input type="hidden" name="gekozen_klus" id="input_klus_type">
+    <!-- HET FORMULIER GEDEELTE -->
+    <section id="klusjes-formulier">
+        <div class="form-card">
+            <form action="JOUW_FORMSPREE_URL" method="POST">
+                <!-- Honeypot voor veiligheid -->
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <!-- Pagina 1: Details -->
+                <div id="stap-1" class="form-page active">
+                    <h2 style="color:#077840">Details van de klus</h2>
+                    <textarea name="omschrijving" rows="4" placeholder="Wat moet er gebeuren? (Schoonmaken, tuinieren, etc.)" required></textarea>
+                    <div style="display:flex; gap:10px;">
+                        <input type="date" name="datum" required title="Datum">
+                        <input type="text" name="tijd" placeholder="Tijdstip" required>
+                    </div>
+                    <input type="number" name="donatie" placeholder="Voorgestelde bijdrage (€)" required>
+                    <button type="button" onclick="gaNaarStap(2)" class="aanmeld-btn">Volgende stap</button>
+                </div>
 
-            <!-- PAGINA KEUZE -->
-            <div id="pagina-keuze" class="page-section active">
-                <h3 class="text-center">Wat kunnen we doen?</h3>
-                <div class="grid-buttons">
-                    <button type="button" onclick="selectKlus('Tuinieren')" class="klus-btn">🌳 Tuinieren</button>
-                    <button type="button" onclick="selectKlus('Schoonmaken')" class="klus-btn">🧹 Schoonmaken</button>
-                    <button type="button" onclick="selectKlus('Boodschappen')" class="klus-btn">🛒 Boodschappen</button>
-                    <button type="button" onclick="selectKlus('Anders')" class="klus-btn">✨ Iets anders...</button>
+                <!-- Pagina 2: Contact -->
+                <div id="stap-2" class="form-page">
+                    <h2 style="color:#077840">Jouw Contactgegevens</h2>
+                    <input type="text" name="naam" placeholder="Volledige naam" required>
+                    <input type="email" name="email" placeholder="E-mailadres" required>
+                    <input type="tel" name="telefoon" placeholder="Telefoonnummer">
+                    <div class="btn-row">
+                        <button type="button" onclick="gaNaarStap(1)" style="flex:1; background:#eee; border:none; border-radius:10px; cursor:pointer;">Terug</button>
+                        <button type="submit" style="flex:2" class="aanmeld-btn">Verstuur Aanmelding</button>
+                    </div>
                 </div>
-            </div>
-
-            <!-- PAGINA DETAILS -->
-            <div id="pagina-details" class="page-section">
-                <h3>Details van de klus</h3>
-                <textarea name="omschrijving" rows="3" placeholder="Beschrijf de klus..." required></textarea>
-                <div style="display: flex; gap: 10px;">
-                    <input type="date" name="datum" required>
-                    <input type="text" name="tijd" placeholder="Tijd (bv. 14:00)" required>
-                </div>
-                <input type="number" name="donatie" placeholder="Bijdrage (€)" required>
-                <div style="display:flex; gap:10px; margin-top:10px;">
-                    <button type="button" onclick="showFormPage('pagina-keuze')" style="flex:1;">Terug</button>
-                    <button type="button" onclick="showFormPage('pagina-contact')" class="btn-green" style="flex:2;">Volgende</button>
-                </div>
-            </div>
-
-            <!-- PAGINA CONTACT -->
-            <div id="pagina-contact" class="page-section">
-                <h3>Jouw gegevens</h3>
-                <input type="text" name="naam" placeholder="Naam" required>
-                <input type="email" name="email" placeholder="E-mailadres" required>
-                <input type="text" name="telefoon" placeholder="Telefoonnummer">
-                <div style="display:flex; gap:10px; margin-top:10px;">
-                    <button type="button" onclick="showFormPage('pagina-details')" style="flex:1;">Terug</button>
-                    <button type="submit" class="btn-green" style="flex:2;">Verstuur Aanmelding</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </section>
 
     <script>
-        function showFormPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+        function openFormulier() {
+            document.getElementById('klusjes-formulier').style.display = 'block';
+            window.location.hash = 'klusjes-formulier';
         }
 
-        function selectKlus(klusNaam) {
-            document.getElementById('input_klus_type').value = klusNaam;
-            showFormPage('pagina-details');
+        function gaNaarStap(stapNummer) {
+            document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
+            document.getElementById('stap-' + stapNummer).classList.add('active');
         }
     </script>
+
 </body>
 </html>
