@@ -3,185 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorers Alblasserdam - Home</title>
+    <title>Explorers Alblasserdam</title>
     <style>
-        /* ALGEMENE STIJL */
         body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; scroll-behavior: smooth; }
         
         /* NAVIGATIE */
         nav { background: #077840; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-        nav a:hover { text-decoration: underline; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; cursor: pointer; }
 
-        /* 1. WELKOM SECTIE & SLIDESHOW */
-        .welcome-section {
-            position: relative;
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            color: white;
-            text-align: center;
-        }
-        .bg-slider {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            background-size: cover;
-            background-position: center;
-            animation: backgroundRotate 25s infinite;
-        }
-        .welcome-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 2;
-        }
+        /* PAGINA BEHEER */
+        .page { display: none; } /* Alles standaard verbergen */
+        .page.active { display: block; } /* Alleen de actieve pagina tonen */
+
+        /* SLIDESHOW (Op Home) */
+        .welcome-section { position: relative; height: 60vh; display: flex; align-items: center; justify-content: center; color: white; text-align: center; overflow: hidden; }
+        .bg-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-size: cover; background-position: center; animation: backgroundRotate 25s infinite; }
+        .welcome-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2; }
         .welcome-content { position: relative; z-index: 3; }
-        .welcome-content h1 { font-size: 3em; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-        @keyframes backgroundRotate {
+       @keyframes backgroundRotate {
             0%, 18% { background-image: url('https://www.scoutingpolaris.nl/images/phocagallery/Groepsactiviteiten/2019/2019bruglindegracht/2019-09-07%2014.07.46.jpg'); }
             20%, 38% { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNujjk3tR97FzmDg_76Tpx8_tyAYbIpNeMA&s'); }
             40%, 58% { background-image: url('data:image/jpeg;base64,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'); }
             60%, 78% { background-image: url('https://www.scouting-alblasserdam.nl/verslagen/algemeen/2023-boerenkool/8233/image-thumb__8233__header_293/mch_7242.jpg'); }
             80%, 98% { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9qXpEpg-A0liGkZJy74Ry1elyfJ1FQ1zE6Q&s'); }
             100% { background-image: url('https://www.alblasserdamsnieuws.nl/wordpress/wp-content/uploads/2014/02/scouting-Alblasserdam.jpg'); }
+
         }
 
-        /* 2. DONATIE BALK */
-        .donation-bar {
-            background-color: #ffffff;
-            padding: 50px 20px;
-            text-align: center;
-            border-top: 5px solid #077840; 
-            border-bottom: 5px solid #077840;
-        }
-        .donate-btn {
-            background-color: #077840; color: white !important;
-            padding: 15px 40px; text-decoration: none;
-            font-size: 1.2em; font-weight: bold; border-radius: 5px;
-            display: inline-block; transition: 0.3s;
-        }
-        .donate-btn:hover { background-color: #055a30; transform: scale(1.05); }
+        /* SECTIES */
+        section { padding: 50px 20px; text-align: center; max-width: 900px; margin: auto; }
+        .donation-bar { border-top: 5px solid #077840; background: white; padding: 40px; margin: 20px 0; }
+        .btn-green { background: #077840; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; border: none; cursor: pointer; }
 
-        /* 3. ACTIE GEDEELTE (OVER ONS) */
-        .action-section { padding: 60px 20px; background: #f4f4f4; text-align: center; }
-        .action-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .action-card { background: white; padding: 20px; width: 250px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* OVER ONS PAGINA SPECIFIEK */
+        .over-ons-content { text-align: left; line-height: 1.6; font-size: 1.1em; }
+        .over-ons-header { background: #077840; color: white; padding: 40px; text-align: center; margin-bottom: 30px; }
 
-        /* 4. KLUSJES FORMULIER (INTERACTIEF) */
-        .form-container { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .page-section { display: none; }
-        .page-section.active { display: block; }
-        
-        .klus-btn {
-            width: 100%; text-align: left; border: 2px solid #eee; padding: 15px; 
-            margin-bottom: 10px; border-radius: 12px; background: none; 
-            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-        .klus-btn:hover { border-color: #077840; background: #f0fff4; }
-        
-        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; }
-        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
-        .next-btn { background: #077840; color: white; border: none; padding: 15px; flex: 2; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .back-btn { background: #eee; color: #333; border: none; padding: 15px; flex: 1; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        /* FORMULIER STIJL */
+        .form-container { max-width: 600px; margin: auto; background: #f4f4f4; padding: 30px; border-radius: 15px; text-align: left; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#over-ons">Over Ons</a>
-        <a href="#actie">Klusjesdag Actie</a>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('over-ons')">Over Ons</a>
+        <a onclick="showPage('actie')">Klusjesdag Actie</a>
     </nav>
 
-    <section id="home" class="welcome-section">
-        <div class="bg-slider"></div>
-        <div class="welcome-overlay"></div>
-        <div class="welcome-content">
-            <h1>Welkom bij de Explorers</h1>
-            <p>Scouting Alblasserdam - Durf jij het avontuur aan?</p>
+    <!-- HOOFDPAGINA (HOME) -->
+    <div id="home" class="page active">
+        <section class="welcome-section">
+            <div class="bg-slider"></div>
+            <div class="welcome-overlay"></div>
+            <div class="welcome-content">
+                <h1>Explorers Alblasserdam</h1>
+                <p>Durf jij het avontuur aan?</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Welkom bij onze groep</h2>
+            <p>Wij zijn de Explorers van Scouting Alblasserdam. Een gezellige groep jongeren die elke week samenkomt voor actie en avontuur.</p>
+            <button class="btn-green" onclick="showPage('over-ons')">Lees meer over ons</button>
+        </section>
+
+        <section class="donation-bar">
+            <h2>Steun onze Expedities</h2>
+            <a href="https://scoutingalblasserdam.nl" class="btn-green">Nu Doneren</a>
+        </section>
+    </div>
+
+    <!-- OVER ONS PAGINA (APART) -->
+    <div id="over-ons" class="page">
+        <div class="over-ons-header">
+            <h1>Over de Explorers</h1>
         </div>
-    </section>
+        <section class="over-ons-content">
+            <h2>Wie zijn wij?</h2>
+            <p>Wij zijn de <strong>Explorers van Scouting Alblasserdam</strong>. Onze groep is een grote, enthousiaste mix van jongens en meiden in de leeftijd van <strong>15 tot 18 jaar</strong>.</p>
+            <p>Bij de Explorers is geen enkele opkomst hetzelfde. Wat ons uniek maakt, is dat we onze eigen programma's maken en uitvoeren. Of het nu gaat om het bouwen van vlotten, hiken met een rugzak, uitdagende buitensporten of gewoon een gezellig kampvuur: wij regelen het zelf.</p>
+            <p>Elk jaar organiseren we ook een spectaculair zomerkamp, vaak in het buitenland, waarbij we de grenzen opzoeken en herinneringen maken voor het leven. Wil je een keer komen kijken? Je bent altijd welkom!</p>
+            <center><button class="btn-green" onclick="showPage('home')">Terug naar Home</button></center>
+        </section>
+    </div>
 
-    <section class="donation-bar">
-        <h2>Steun onze Expedities</h2>
-        <p>Help de Explorers bij het realiseren van nieuwe uitdagingen.</p>
-        <a href="https://scoutingalblasserdam.nl" class="donate-btn">Nu Doneren</a>
-    </section>
-
-    <section id="over-ons" class="action-section">
-        <h2>Wat doen wij?</h2>
-        <div class="action-grid">
-            <div class="action-card"><h3>Buitensport</h3><p>Klimmen en hiken.</p></div>
-            <div class="action-card"><h3>Kampvuren</h3><p>Gezelligheid en koken.</p></div>
-            <div class="action-card"><h3>Zomerkamp</h3><p>Grensverleggende reizen.</p></div>
-        </div>
-    </section>
-
-    <!-- HET INTERACTIEVE FORMULIER -->
-    <section id="actie" class="action-section" style="background: #e9e9e9;">
-        <div class="form-container">
-            <form id="klusForm" action="JOUW_FORMSPREE_URL" method="POST">
-                
-                <!-- STAP 1: KEUZE -->
-                <div id="pagina-keuze" class="page-section active">
-                    <h2 style="color: #077840;">Wat kunnen we doen?</h2>
-                    <button type="button" onclick="selectKlus('Tuinieren')" class="klus-btn">🌳 Tuinieren</button>
-                    <button type="button" onclick="selectKlus('Schoonmaken')" class="klus-btn">🧹 Schoonmaken</button>
-                    <button type="button" onclick="selectKlus('Boodschappen')" class="klus-btn">🛒 Boodschappen</button>
-                    <button type="button" onclick="selectKlus('Anders')" class="klus-btn">✨ Iets anders...</button>
-                    <input type="hidden" name="gekozen_klus" id="input_klus_type">
-                </div>
-
-                <!-- STAP 2: DETAILS -->
-                <div id="pagina-details" class="page-section">
-                    <h2 style="color: #077840;">Details van de klus</h2>
-                    <textarea name="omschrijving" rows="3" placeholder="Beschrijf de klus..." required></textarea>
-                    <div style="display:flex; gap:10px;">
-                        <input type="date" name="datum" required>
-                        <input type="text" name="tijd" placeholder="Tijdstip (bv. 14:00)" required>
-                    </div>
-                    <input type="number" name="donatie" placeholder="Bijdrage (€)" required>
-                    <div class="btn-row">
-                        <button type="button" onclick="showPage('pagina-keuze')" class="back-btn">Terug</button>
-                        <button type="button" onclick="showPage('pagina-contact')" class="next-btn">Volgende</button>
-                    </div>
-                </div>
-
-                <!-- STAP 3: CONTACT -->
-                <div id="pagina-contact" class="page-section">
-                    <h2 style="color: #077840;">Jouw gegevens</h2>
-                    <input type="text" name="naam" placeholder="Naam" required>
+    <!-- ACTIE PAGINA -->
+    <div id="actie" class="page">
+        <section>
+            <h1>Denemarken Klusjesdag</h1>
+            <div class="form-container">
+                <form action="#" method="POST">
+                    <label>Wat voor klus heb je?</label>
+                    <input type="text" name="klus" placeholder="Bv. Tuinieren, Schoonmaken" required>
+                    <input type="text" name="naam" placeholder="Jouw Naam" required>
                     <input type="email" name="email" placeholder="E-mailadres" required>
-                    <input type="text" name="telefoon" placeholder="Telefoonnummer">
-                    <div class="btn-row">
-                        <button type="button" onclick="showPage('pagina-details')" class="back-btn">Terug</button>
-                        <button type="submit" class="next-btn">Verstuur Aanmelding</button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </section>
+                    <textarea name="bericht" rows="4" placeholder="Vertel ons meer over de klus..."></textarea>
+                    <button type="submit" class="btn-green" style="width: 100%;">Verstuur Aanmelding</button>
+                </form>
+            </div>
+            <p><a onclick="showPage('home')" style="cursor:pointer; color:#077840;">← Terug naar de hoofdpagina</a></p>
+        </section>
+    </div>
 
     <script>
+        // Functie om tussen pagina's te wisselen zonder te verversen
         function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            // Verberg alle pagina's
+            var pages = document.getElementsByClassName('page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+            // Toon de gekozen pagina
             document.getElementById(pageId).classList.add('active');
-            window.location.hash = 'actie'; // Houdt focus op het formulier
-        }
-
-        function selectKlus(klusNaam) {
-            document.getElementById('input_klus_type').value = klusNaam;
-            showPage('pagina-details');
+            // Scroll naar boven
+            window.scrollTo(0, 0);
         }
     </script>
 
 </body>
 </html>
-
