@@ -137,37 +137,99 @@
         </div>
     </section>
 
-    <!-- DENEMARKEN KLUSJESDAG FORMULIER -->
-    <section id="actie" class="action-section" style="background: #e9e9e9;">
-        <div class="denemarken-actie">
-            <h2>Aanmelden Denemarken Klusjesdag</h2>
-            <p style="text-align: center;">Help ons en vul je gegevens in voor de actie.</p>
-            
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label>Volledige Naam</label>
-                    <input type="text" name="naam" required>
-                </div>
-                <div class="form-group">
-                    <label>E-mailadres</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Telefoonnummer</label>
-                    <input type="tel" name="telefoon">
-                </div>
-                <div class="form-group">
-                    <label>Welke klus heb je voor ons?</label>
-                    <textarea name="klus" rows="4"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Verstuur Aanmelding</button>
-            </form>
+  <div id="pagina-keuze" class="page-section bg-white rounded-3xl shadow-xl p-8">
+            <h2 class="text-2xl font-bold mb-6 text-scout-green border-b pb-2 text-center">Wat kunnen we doen?</h2>
+            <div class="grid grid-cols-1 gap-4 mb-8">
+                <button onclick="selectKlus('Tuinieren')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">🌳 Tuinieren</button>
+                <button onclick="selectKlus('Schoonmaken')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">🧹 Schoonmaken</button>
+                <button onclick="selectKlus('Boodschappen')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">🛒 Boodschappen</button>
+                <button onclick="selectKlus('Anders')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">✨ Iets anders...</button>
+            </div>
+            <button onclick="showPage('pagina-klus-intro')" class="text-gray-400 font-bold">← Vorige stap</button>
         </div>
-    </section>
 
-    <footer id="contact" style="text-align: center; padding: 40px; background: #333; color: white;">
-        <p>&copy; 2024 Explorers Alblasserdam - Scouting Alblasserdam</p>
-    </footer>
+        <form id="klusForm">
+            <!-- BOT CATCHER (HONEYPOT) -->
+            <input type="text" name="_gotcha" style="display:none">
+            <input type="hidden" name="gekozen_klus" id="input_klus_type">
 
-</body>
-</html>
+            <div id="pagina-details" class="page-section bg-white rounded-3xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 text-scout-green border-b pb-2 italic text-center">Details van de klus</h2>
+                <div class="space-y-5">
+                    <textarea name="omschrijving" rows="3" class="w-full border-2 p-4 rounded-2xl outline-none focus:border-green-500 shadow-inner" placeholder="Beschrijf de klus..." required></textarea>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="date" name="datum" class="w-full border-2 p-4 rounded-2xl" required>
+                        <input type="text" name="tijd" placeholder="Tijdstip (bv. 14:00)" class="w-full border-2 p-4 rounded-2xl" required>
+                    </div>
+                    <input type="number" name="donatie" class="w-full border-2 border-orange-200 p-4 rounded-2xl focus:border-orange-500 shadow-inner" placeholder="Bijdrage (€)" required>
+                </div>
+                <div class="flex gap-4 mt-8">
+                    <button type="button" onclick="showPage('pagina-keuze')" class="w-1/3 bg-gray-100 py-4 rounded-2xl font-bold">Terug</button>
+                    <button type="button" onclick="showPage('pagina-contact')" class="w-2/3 bg-scout-green text-white py-4 rounded-2xl font-bold shadow-md">Volgende</button>
+                </div>
+            </div>
+
+            <div id="pagina-contact" class="page-section bg-white rounded-3xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 text-scout-green border-b pb-2 italic text-center">Contactgegevens</h2>
+                <div class="space-y-4">
+                    <input type="text" name="naam" id="naam" placeholder="Naam (Verplicht)" class="w-full border-2 p-4 rounded-xl focus:border-green-500 outline-none" required>
+                    <input type="email" name="email" id="email" placeholder="E-mailadres" class="w-full border-2 p-4 rounded-xl focus:border-green-500 outline-none">
+                    <input type="tel" name="telefoon" id="tel" placeholder="Telefoonnummer" class="w-full border-2 p-4 rounded-xl focus:border-green-500 outline-none">
+                    <p id="error-contact" class="text-red-600 text-sm font-bold hidden text-center italic">⚠️ Vul e-mail of telefoonnummer in!</p>
+                </div>
+                <button type="submit" id="submitBtn" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-bold shadow-lg mt-8 text-xl hover:bg-orange-600 transition-all">Verstuur Aanmelding! 🚀</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    function showPage(pageId) {
+        document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function selectKlus(type) {
+        document.getElementById('input_klus_type').value = type;
+        showPage('pagina-details');
+    }
+
+    const form = document.getElementById('klusForm');
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "Bezig met verzenden...";
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch("https://submit-form.com/iuKUYiFj1", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert("✅ GELUKT! We hebben je aanvraag ontvangen.");
+                form.reset();
+                showPage('pagina-home');
+            } else {
+                const errorText = await response.text();
+                alert("❌ SERVER FOUT: " + errorText);
+            }
+        } catch (error) {
+            alert("❌ NETWERK FOUT: Check je internet of GitHub link.");
+            console.error(error);
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "Verstuur Aanmelding! 🚀";
+        }
+    });
+</script>
+
