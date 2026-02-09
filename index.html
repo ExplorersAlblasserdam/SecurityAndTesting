@@ -27,14 +27,14 @@
         .welcome-content { position: relative; z-index: 3; }
         @keyframes backgroundRotate { 0%, 18% { background-image: url('foto1.jpg'); } 20%, 38% { background-image: url('foto2.jpg'); } 40%, 58% { background-image: url('foto3.jpg'); } 60%, 100% { background-image: url('foto1.jpg'); } }
 
-        /* DONEER KNOP HOME */
+        /* GROENE DONEER KNOP HOME */
         .donate-container { padding: 80px 20px; text-align: center; background: white; }
         .big-donate-btn { 
-            display: inline-block; padding: 25px 50px; background: #ff7d31; color: white; 
+            display: inline-block; padding: 25px 50px; background: #077840; color: white; 
             text-decoration: none; font-size: 24px; font-weight: bold; border-radius: 50px; 
-            box-shadow: 0 10px 20px rgba(255,125,49,0.3); transition: transform 0.3s; 
+            box-shadow: 0 10px 20px rgba(7,120,64,0.3); transition: transform 0.3s; 
         }
-        .big-donate-btn:hover { transform: scale(1.05); background: #e66a20; }
+        .big-donate-btn:hover { transform: scale(1.05); background: #1b5e20; }
 
         /* LOOPENDE ACTIES */
         .actie-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 40px; }
@@ -42,8 +42,9 @@
         .actie-header { background: #ff7d31; padding: 12px; color: white; font-weight: bold; text-align: center; text-transform: uppercase; }
         .actie-body { padding: 30px; }
         .opbrengst-teller { background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 10px; font-weight: bold; margin-bottom: 15px; border: 1px solid #c8e6c9; text-align: center; }
+        .aanmeld-btn { background: #1b5e20; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        /* EERDERE ACTIES (GEBLEVEN ZOALS HET WAS) */
+        /* EERDERE ACTIES */
         .archive-container { padding: 60px 20px; text-align: center; }
         .archive-card { background: white; width: 450px; margin: 20px auto; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); max-height: 100px; cursor: pointer; }
         .archive-card:hover { max-height: 800px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
@@ -52,11 +53,10 @@
         @keyframes archiveSlide { 0%, 30% { background-image: url('kamp-foto1.jpg'); } 33%, 63% { background-image: url('kamp-foto2.jpg'); } 66%, 100% { background-image: url('kamp-foto3.jpg'); } }
         .archive-text { padding: 30px; text-align: left; line-height: 1.6; border-top: 1px solid #eee; }
 
-        /* FORMULIER STIJL */
-        .form-step { display: none; padding: 20px; }
-        .form-step.active { display: block; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        .btn-next { background: #077840; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        /* FORMULIER GEDEELTE */
+        .form-page-container { display: none; padding: 60px 20px; background: #f9f9f9; min-height: 80vh; }
+        body.showing-form .page { display: none; }
+        body.showing-form .form-page-container { display: block; }
     </style>
 </head>
 <body>
@@ -85,9 +85,9 @@
     </section>
 
     <section class="donate-container">
-        <h2>Steun onze reis naar Denemarken</h2>
+        <h2>Steun onze projecten</h2>
         <p>Wil je ons direct helpen? Elke bijdrage is welkom!</p><br>
-        <a href="https://betaalverzoek.rabobank.nl" target="_blank" class="big-donate-btn">DONEREN 🧡</a>
+        <a href="https://betaalverzoek.rabobank.nl" target="_blank" class="big-donate-btn">DONEREN 💰</a>
     </section>
 </div>
 
@@ -95,35 +95,12 @@
 <div id="lopende-acties" class="page">
     <section class="actie-grid">
         <div class="actie-card">
-            <div class="actie-header">Zomerkamp 2026</div>
+            <div class="actie-header">Zomerkamp Denemarken 2026</div>
             <div class="actie-body">
                 <div class="opbrengst-teller">💰 Opgehaald: € 450,00</div>
-                <h3>⚙️ Klusjesactie</h3>
-                <p>Meld hier je klusje aan:</p>
-                
-                <div id="multi-step-form">
-                    <!-- Stap 1 -->
-                    <div class="form-step active" id="step1">
-                        <input type="text" id="naam" placeholder="Je Naam" required>
-                        <input type="text" id="adres" placeholder="Straat + Huisnummer" required>
-                        <button class="btn-next" onclick="nextStep(2)">Volgende</button>
-                    </div>
-                    <!-- Stap 2 -->
-                    <div class="form-step" id="step2">
-                        <select id="klus">
-                            <option value="tuin">Tuinonderhoud</option>
-                            <option value="schoonmaak">Schoonmaken</option>
-                            <option value="anders">Iets anders...</option>
-                        </select>
-                        <textarea id="toelichting" placeholder="Korte omschrijving van de klus..."></textarea>
-                        <button class="btn-next" onclick="nextStep(3)">Aanmelding Verzenden</button>
-                    </div>
-                    <!-- Stap 3 -->
-                    <div class="form-step" id="step3">
-                        <p style="color: green; font-weight: bold; text-align: center;">✅ Bedankt! We nemen snel contact met je op.</p>
-                        <button class="btn-next" onclick="resetForm()">Nog een klus?</button>
-                    </div>
-                </div>
+                <h3>⚙️ Klusjesactie 2026</h3>
+                <p>Hulp nodig in de tuin of bij de schoonmaak? De Explorers steken graag de handen uit de mouwen!</p>
+                <button onclick="startAanmelding()" class="aanmeld-btn">Klusje Aanmelden</button>
             </div>
         </div>
     </section>
@@ -138,31 +115,40 @@
             <div class="archive-slideshow"></div>
             <div class="archive-text">
                 <h3>Wat hebben we gedaan?</h3>
-                <p>Met de fantastische opbrengst van onze vorige klusjesactie zijn we op zomerkamp naar Denemarken gegaan. Dankzij jullie hulp hebben we een onvergetelijke reis kunnen maken.</p>
+                <p>Met de fantastische opbrengst van onze vorige actie zijn we naar Denemarken gegaan.</p>
                 <p><strong>Resultaat:</strong> € 1.250,- opgehaald!</p>
             </div>
         </div>
     </section>
 </div>
 
+<!-- FORMULIER PAGINA -->
+<div id="form-container" class="form-page-container">
+    <center>
+        <h2>Klusje Aanmelden</h2>
+        <p>Vul het formulier in en we komen bij je langs.</p>
+        <div style="max-width: 400px; text-align: left; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <input type="text" placeholder="Je Naam" style="width:100%; padding:10px; margin-bottom:10px;">
+            <input type="text" placeholder="Adres" style="width:100%; padding:10px; margin-bottom:10px;">
+            <textarea placeholder="Wat moet er gebeuren?" style="width:100%; padding:10px; margin-bottom:10px; height:80px;"></textarea>
+            <button onclick="showPage('home')" class="aanmeld-btn">Verzenden</button>
+        </div>
+        <br>
+        <button onclick="showPage('home')" style="background:none; border:none; color:#666; cursor:pointer;">Annuleren</button>
+    </center>
+</div>
+
 <script>
     function showPage(pageId) {
+        document.body.classList.remove('showing-form');
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         window.scrollTo(0, 0);
     }
 
-    function nextStep(step) {
-        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step' + step).classList.add('active');
-    }
-
-    function resetForm() {
-        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step1').classList.add('active');
-        document.getElementById('naam').value = '';
-        document.getElementById('adres').value = '';
-        document.getElementById('toelichting').value = '';
+    function startAanmelding() {
+        document.body.classList.add('showing-form');
+        window.scrollTo(0, 0);
     }
 </script>
 
