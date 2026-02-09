@@ -3,55 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mijn Sandbox</title>
+    <title>Explorers Alblasserdam - Home</title>
     <style>
-        :root { --bg: #ffffff; --text: #1a1a1a; }
-        [data-theme="dark"] { --bg: #0f172a; --text: #f8fafc; }
+        /* ALGEMENE STIJL */
+        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; }
         
-        body { background: var(--bg); color: var(--text); font-family: sans-serif; transition: 0.3s; padding: 2rem; }
-        .card { border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px; }
-        button { background: #0070f3; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px; }
-        input { padding: 0.5rem; width: 100%; max-width: 300px; margin-bottom: 1rem; display: block; }
+        /* NAVIGATIE */
+        nav { background: #077840; padding: 15px; text-align: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+
+        /* 1. WELKOM SECTIE MET ROTERENDE ACHTERGROND */
+        .welcome-section {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        .bg-slider {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            background-size: cover;
+            background-position: center;
+            animation: backgroundRotate 15s infinite; /* 15 seconden cyclus */
+        }
+
+        .welcome-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Donkere laag voor leesbaarheid */
+            z-index: 2;
+        }
+
+        .welcome-content { position: relative; z-index: 3; }
+        .welcome-content h1 { font-size: 3em; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+
+        @keyframes backgroundRotate {
+            0%, 30% { background-image: url('https://images.unsplash.com'); }
+            33%, 63% { background-image: url('https://images.unsplash.com'); }
+            66%, 96% { background-image: url('https://images.unsplash.com'); }
+            100% { background-image: url('https://images.unsplash.com'); }
+        }
+
+        /* 2. DONATIE BALK (GROEN THEMA) */
+        .donation-bar {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 5px solid #077840; 
+            border-bottom: 5px solid #077840;
+        }
+
+        .donation-bar h2 { color: #077840; margin-top: 0; }
+        
+        .donate-btn {
+            background-color: #077840;
+            color: white !important;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .donate-btn:hover { background-color: #055a30; transform: scale(1.05); }
+
+        /* 3. ACTIE GEDEELTE */
+        .action-section {
+            padding: 60px 20px;
+            background: #f4f4f4;
+            text-align: center;
+        }
+        .action-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .action-card {
+            background: white;
+            padding: 20px;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
 
-    <h1>Sandbox</h1>
-    
-    <!-- TEST 1: Dark Mode Toggle -->
-    <div class="card">
-        <h3>1. UI Experiment: Dark Mode</h3>
-        <button onclick="toggleTheme()">Wissel Thema</button>
-    </div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Over Ons</a>
+        <a href="#">Programma</a>
+        <a href="#">Contact</a>
+    </nav>
 
-    <!-- TEST 2: Interactief Contactformulier -->
-    <div class="card">
-        <h3>2. Formulier</h3>
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Naam" required>
-            <input type="email" id="email" placeholder="E-mail" required>
-            <button type="submit">Verstuur Data</button>
-        </form>
-        <p id="formFeedback"></p>
-    </div>
+    <!-- WELKOM -->
+    <section class="welcome-section">
+        <div class="bg-slider"></div>
+        <div class="welcome-overlay"></div>
+        <div class="welcome-content">
+            <h1>Welkom bij de Explorers</h1>
+            <p>Scouting Alblasserdam - Durf jij het avontuur aan?</p>
+        </div>
+    </section>
 
-    <script>
-        // 1. Dark Mode Logica met LocalStorage
-        const toggleTheme = () => {
-            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        };
+    <!-- DONATIE (Tussen Welkom en Actie) -->
+    <section class="donation-bar">
+        <h2>Steun onze Expedities</h2>
+        <p>Help de Explorers bij het realiseren van nieuwe uitdagingen.</p>
+        <a href="JOUW-BETAAL-LINK" class="donate-btn">Nu Doneren</a>
+    </section>
 
-        // 2. Formulier Validatie (Input Sanitization)
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.replace(/<[^>]*>?/gm, ''); // Basis XSS filter
-            document.getElementById('formFeedback').innerText = `Bedankt, ${name}! Je data is verwerkt.`;
-        });
+    <!-- ACTIE GEDEELTE -->
+    <section class="action-section">
+        <h2>Wat doen wij?</h2>
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>Buitensport</h3>
+                <p>Klimmen, hiken en vlotten bouwen.</p>
+            </div>
+            <div class="action-card">
+                <h3>Kampvuren</h3>
+                <p>Gezelligheid en koken op eigen vuur.</p>
+            </div>
+            <div class="action-card">
+                <h3>Zomerkamp</h3>
+                <p>Elk jaar een grensverleggende reis.</p>
+            </div>
+        </div>
+    </section>
 
-        // Bij opstarten: check opgeslagen thema
-        if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    </script>
 </body>
 </html>
