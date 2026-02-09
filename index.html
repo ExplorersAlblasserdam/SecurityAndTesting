@@ -10,7 +10,15 @@
         
         /* NAVIGATIE */
         nav { background: #077840; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; cursor: pointer; }
+
+        /* PAGINA BEHEER */
+        .main-content { display: block; }
+        .form-page-container { display: none; padding: 60px 20px; min-height: 80vh; background: #f9f9f9; }
+        
+        /* ACTIEVE PAGINA LOGICA */
+        body.showing-form .main-content { display: none; }
+        body.showing-form .form-page-container { display: block; }
 
         /* 1. SLIDESHOW */
         .welcome-section { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden; color: white; text-align: center; }
@@ -20,91 +28,45 @@
         .welcome-content h1 { font-size: 3em; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
         @keyframes backgroundRotate {
-            0%, 18% { background-image: url('https://www.scoutingpolaris.nl/images/phocagallery/Groepsactiviteiten/2019/2019bruglindegracht/2019-09-07%2014.07.46.jpg'); }
-            20%, 38% { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNujjk3tR97FzmDg_76Tpx8_tyAYbIpNeMA&s'); }
-            40%, 100% { background-image: url('https://www.scoutingpolaris.nl/images/phocagallery/Groepsactiviteiten/2019/2019bruglindegracht/2019-09-07%2014.07.46.jpg'); }
+            0%, 18% { background-image: url('https://www.scoutingpolaris.nl'); }
+            20%, 38% { background-image: url('https://encrypted-tbn0.gstatic.com'); }
+            40%, 100% { background-image: url('https://www.scoutingpolaris.nl'); }
         }
 
         /* 2. DONATIE BALK */
         .donation-bar { background-color: #ffffff; padding: 50px 20px; text-align: center; border-top: 5px solid #077840; border-bottom: 1px solid #eee; }
         .donate-btn { background-color: #077840; color: white !important; padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; }
 
-        /* 3. ONZE ACTIES SECTIE (SCREENSHOT STIJL) */
+        /* 3. ONZE ACTIES SECTIE */
         .onze-acties-container { padding: 60px 20px; text-align: center; }
         .onze-acties-title { color: #077840; font-size: 2em; font-weight: 900; margin-bottom: 40px; text-transform: uppercase; }
-        
         .actie-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
 
-        /* De Card uit de screenshot */
-        .actie-card { 
-            background: white; 
-            width: 350px; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-            text-align: left;
-        }
-        .actie-header { 
-            background: #ff7d31; 
-            padding: 12px; 
-            color: white; 
-            font-weight: bold; 
-            font-size: 0.8em; 
-            text-align: center;
-            text-transform: uppercase;
-        }
+        .actie-card { background: white; width: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; }
+        .actie-header { background: #ff7d31; padding: 12px; color: white; font-weight: bold; font-size: 0.8em; text-align: center; text-transform: uppercase; }
         .actie-body { padding: 30px; }
-        .actie-body h3 { margin: 0 0 15px 0; font-size: 1.4em; display: flex; align-items: center; gap: 10px; }
         .actie-body p { color: #666; font-size: 0.95em; line-height: 1.5; margin-bottom: 25px; }
         
-        .aanmeld-btn { 
-            background: #1b5e20; 
-            color: white; 
-            border: none; 
-            padding: 15px; 
-            width: 100%; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: 0.3s;
-            text-align: center;
-            display: block;
-            text-decoration: none;
-        }
-        .aanmeld-btn:hover { background: #144618; }
+        .aanmeld-btn { background: #1b5e20; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; display: block; text-decoration: none; }
+        .actie-placeholder { width: 350px; border: 3px dashed #eee; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #aaa; font-weight: bold; text-align: center; min-height: 300px; }
 
-        /* Placeholder voor nieuwe acties */
-        .actie-placeholder {
-            width: 350px;
-            border: 3px dashed #eee;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #aaa;
-            font-weight: bold;
-            text-align: center;
-            min-height: 300px;
-        }
-
-        /* 4. HET FORMULIER (STANDAARD VERBORGEN) */
-        #klusjes-formulier { display: none; padding: 60px 20px; background: #f9f9f9; }
+        /* 4. FORMULIER STIJL */
         .form-card { max-width: 600px; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        .form-page { display: none; }
-        .form-page.active { display: block; }
+        .form-step { display: none; }
+        .form-step.active { display: block; }
         input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #f0f0f0; border-radius: 10px; box-sizing: border-box; }
-        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#acties">Acties</a>
+        <a onclick="showHome()">Home</a>
+        <a onclick="showHome()">Acties</a>
         <a href="https://scoutingalblasserdam.nl" target="_blank">Scouting Site</a>
     </nav>
 
-    <div id="home">
+    <!-- DE HOOFDPAGINA -->
+    <div id="main-content" class="main-content">
         <section class="welcome-section">
             <div class="bg-slider"></div>
             <div class="welcome-overlay"></div>
@@ -118,72 +80,71 @@
             <h2>Steun onze Expedities</h2>
             <a href="https://scoutingalblasserdam.nl" class="donate-btn">Nu Doneren</a>
         </section>
+
+        <section class="onze-acties-container">
+            <h2 class="onze-acties-title">Onze Acties</h2>
+            <div class="actie-grid">
+                <div class="actie-card">
+                    <div class="actie-header">Zomerkamp Denemarken DK</div>
+                    <div class="actie-body">
+                        <h3>⚙️ Klusjesactie 2026</h3>
+                        <p>Hulp nodig in de tuin of bij de schoonmaak? De Explorers steken graag de handen uit de mouwen!</p>
+                        <button onclick="startAanmelding()" class="aanmeld-btn">Klusje Aanmelden</button>
+                    </div>
+                </div>
+                <div class="actie-placeholder">
+                    <div>BINNENKORT:<br>NIEUWE ACTIES</div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- ONZE ACTIES SECTIE -->
-    <section id="acties" class="onze-acties-container">
-        <h2 class="onze-acties-title">Onze Acties</h2>
-        <div class="actie-grid">
-            
-            <!-- Klusjesactie Card (Exacte Screenshot look) -->
-            <div class="actie-card">
-                <div class="actie-header">Zomerkamp Denemarken DK</div>
-                <div class="actie-body">
-                    <h3>⚙️ Klusjesactie 2026</h3>
-                    <p>Hulp nodig in de tuin of bij de schoonmaak? De Explorers steken graag de handen uit de mouwen!</p>
-                    <button onclick="openFormulier()" class="aanmeld-btn">Klusje Aanmelden</button>
-                </div>
-            </div>
-
-            <!-- Binnenkort Placeholder -->
-            <div class="actie-placeholder">
-                <div>BINNENKORT:<br>NIEUWE ACTIES</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- HET FORMULIER GEDEELTE -->
-    <section id="klusjes-formulier">
+    <!-- DE APARTE FORMULIER PAGINA -->
+    <div id="form-container" class="form-page-container">
         <div class="form-card">
             <form action="JOUW_FORMSPREE_URL" method="POST">
-                <!-- Honeypot voor veiligheid -->
                 <input type="text" name="_gotcha" style="display:none">
                 
-                <!-- Pagina 1: Details -->
-                <div id="stap-1" class="form-page active">
+                <div id="stap-1" class="form-step active">
                     <h2 style="color:#077840">Details van de klus</h2>
-                    <textarea name="omschrijving" rows="4" placeholder="Wat moet er gebeuren? (Schoonmaken, tuinieren, etc.)" required></textarea>
+                    <textarea name="omschrijving" rows="4" placeholder="Wat moet er gebeuren?" required></textarea>
                     <div style="display:flex; gap:10px;">
-                        <input type="date" name="datum" required title="Datum">
+                        <input type="date" name="datum" required>
                         <input type="text" name="tijd" placeholder="Tijdstip" required>
                     </div>
-                    <input type="number" name="donatie" placeholder="Voorgestelde bijdrage (€)" required>
+                    <input type="number" name="donatie" placeholder="Bijdrage (€)" required>
                     <button type="button" onclick="gaNaarStap(2)" class="aanmeld-btn">Volgende stap</button>
+                    <button type="button" onclick="showHome()" style="background:none; border:none; color:gray; cursor:pointer; width:100%; margin-top:15px;">← Terug naar home</button>
                 </div>
 
-                <!-- Pagina 2: Contact -->
-                <div id="stap-2" class="form-page">
+                <div id="stap-2" class="form-step">
                     <h2 style="color:#077840">Jouw Contactgegevens</h2>
                     <input type="text" name="naam" placeholder="Volledige naam" required>
                     <input type="email" name="email" placeholder="E-mailadres" required>
                     <input type="tel" name="telefoon" placeholder="Telefoonnummer">
-                    <div class="btn-row">
+                    <div style="display:flex; gap:10px; margin-top:20px;">
                         <button type="button" onclick="gaNaarStap(1)" style="flex:1; background:#eee; border:none; border-radius:10px; cursor:pointer;">Terug</button>
                         <button type="submit" style="flex:2" class="aanmeld-btn">Verstuur Aanmelding</button>
                     </div>
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 
     <script>
-        function openFormulier() {
-            document.getElementById('klusjes-formulier').style.display = 'block';
-            window.location.hash = 'klusjes-formulier';
+        function startAanmelding() {
+            document.body.classList.add('showing-form');
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            document.body.classList.remove('showing-form');
+            gaNaarStap(1); // Reset formulier naar stap 1
+            window.scrollTo(0, 0);
         }
 
         function gaNaarStap(stapNummer) {
-            document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
             document.getElementById('stap-' + stapNummer).classList.add('active');
         }
     </script>
