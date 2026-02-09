@@ -8,11 +8,12 @@
         /* ALGEMENE STIJL */
         body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; scroll-behavior: smooth; }
         
-        /* NAVIGATIE - Nu werkend met ankers */
+        /* NAVIGATIE */
         nav { background: #077840; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
         nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
 
-        /* 1. WELKOM SECTIE MET ROTERENDE ACHTERGROND (5 FOTO'S) */
+        /* 1. WELKOM SECTIE & SLIDESHOW */
         .welcome-section {
             position: relative;
             height: 70vh;
@@ -23,7 +24,6 @@
             color: white;
             text-align: center;
         }
-
         .bg-slider {
             position: absolute;
             top: 0; left: 0;
@@ -31,9 +31,8 @@
             z-index: 1;
             background-size: cover;
             background-position: center;
-            animation: backgroundRotate 25s infinite; /* Langer gemaakt voor 5 foto's */
+            animation: backgroundRotate 25s infinite;
         }
-
         .welcome-overlay {
             position: absolute;
             top: 0; left: 0;
@@ -41,11 +40,9 @@
             background: rgba(0, 0, 0, 0.4);
             z-index: 2;
         }
-
         .welcome-content { position: relative; z-index: 3; }
         .welcome-content h1 { font-size: 3em; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-        /* Slideshow met 5 foto's */
         @keyframes backgroundRotate {
             0%, 18% { background-image: url('foto1.jpg'); }
             20%, 38% { background-image: url('foto2.jpg'); }
@@ -63,33 +60,35 @@
             border-top: 5px solid #077840; 
             border-bottom: 5px solid #077840;
         }
-        .donation-bar h2 { color: #077840; margin-top: 0; }
         .donate-btn {
             background-color: #077840; color: white !important;
             padding: 15px 40px; text-decoration: none;
             font-size: 1.2em; font-weight: bold; border-radius: 5px;
             display: inline-block; transition: 0.3s;
         }
+        .donate-btn:hover { background-color: #055a30; transform: scale(1.05); }
 
-        /* 3. ACTIE GEDEELTE & FORMULIER */
+        /* 3. ACTIE GEDEELTE (OVER ONS) */
         .action-section { padding: 60px 20px; background: #f4f4f4; text-align: center; }
         .action-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
         .action-card { background: white; padding: 20px; width: 250px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        .denemarken-actie {
-            max-width: 600px;
-            margin: 40px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: left;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        /* 4. KLUSJES FORMULIER (INTERACTIEF) */
+        .form-container { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        
+        .klus-btn {
+            width: 100%; text-align: left; border: 2px solid #eee; padding: 15px; 
+            margin-bottom: 10px; border-radius: 12px; background: none; 
+            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-        .denemarken-actie h2 { color: #077840; text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .submit-btn { background: #077840; color: white; border: none; padding: 15px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 1.1em; font-weight: bold; }
+        .klus-btn:hover { border-color: #077840; background: #f0fff4; }
+        
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; }
+        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
+        .next-btn { background: #077840; color: white; border: none; padding: 15px; flex: 2; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .back-btn { background: #eee; color: #333; border: none; padding: 15px; flex: 1; border-radius: 8px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -98,10 +97,8 @@
         <a href="#home">Home</a>
         <a href="#over-ons">Over Ons</a>
         <a href="#actie">Klusjesdag Actie</a>
-        <a href="#contact">Contact</a>
     </nav>
 
-    <!-- WELKOM / HOME -->
     <section id="home" class="welcome-section">
         <div class="bg-slider"></div>
         <div class="welcome-overlay"></div>
@@ -111,125 +108,79 @@
         </div>
     </section>
 
-    <!-- DONATIE -->
     <section class="donation-bar">
         <h2>Steun onze Expedities</h2>
         <p>Help de Explorers bij het realiseren van nieuwe uitdagingen.</p>
         <a href="https://scoutingalblasserdam.nl" class="donate-btn">Nu Doneren</a>
     </section>
 
-    <!-- ACTIE GEDEELTE (OVER ONS) -->
     <section id="over-ons" class="action-section">
         <h2>Wat doen wij?</h2>
         <div class="action-grid">
-            <div class="action-card">
-                <h3>Buitensport</h3>
-                <p>Klimmen, hiken en vlotten bouwen.</p>
-            </div>
-            <div class="action-card">
-                <h3>Kampvuren</h3>
-                <p>Gezelligheid en koken op eigen vuur.</p>
-            </div>
-            <div class="action-card">
-                <h3>Zomerkamp</h3>
-                <p>Elk jaar een grensverleggende reis.</p>
-            </div>
+            <div class="action-card"><h3>Buitensport</h3><p>Klimmen en hiken.</p></div>
+            <div class="action-card"><h3>Kampvuren</h3><p>Gezelligheid en koken.</p></div>
+            <div class="action-card"><h3>Zomerkamp</h3><p>Grensverleggende reizen.</p></div>
         </div>
     </section>
 
-  <div id="pagina-keuze" class="page-section bg-white rounded-3xl shadow-xl p-8">
-            <h2 class="text-2xl font-bold mb-6 text-scout-green border-b pb-2 text-center">Wat kunnen we doen?</h2>
-            <div class="grid grid-cols-1 gap-4 mb-8">
-                <button onclick="selectKlus('Tuinieren')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">🌳 Tuinieren</button>
-                <button onclick="selectKlus('Schoonmaken')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">🧹 Schoonmaken</button>
-                <button onclick="selectKlus('Boodschappen')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">🛒 Boodschappen</button>
-                <button onclick="selectKlus('Anders')" class="text-left border-2 p-5 rounded-2xl hover:bg-green-50 hover:border-green-600 transition-all font-bold text-lg">✨ Iets anders...</button>
-            </div>
-            <button onclick="showPage('pagina-klus-intro')" class="text-gray-400 font-bold">← Vorige stap</button>
-        </div>
+    <!-- HET INTERACTIEVE FORMULIER -->
+    <section id="actie" class="action-section" style="background: #e9e9e9;">
+        <div class="form-container">
+            <form id="klusForm" action="JOUW_FORMSPREE_URL" method="POST">
+                
+                <!-- STAP 1: KEUZE -->
+                <div id="pagina-keuze" class="page-section active">
+                    <h2 style="color: #077840;">Wat kunnen we doen?</h2>
+                    <button type="button" onclick="selectKlus('Tuinieren')" class="klus-btn">🌳 Tuinieren</button>
+                    <button type="button" onclick="selectKlus('Schoonmaken')" class="klus-btn">🧹 Schoonmaken</button>
+                    <button type="button" onclick="selectKlus('Boodschappen')" class="klus-btn">🛒 Boodschappen</button>
+                    <button type="button" onclick="selectKlus('Anders')" class="klus-btn">✨ Iets anders...</button>
+                    <input type="hidden" name="gekozen_klus" id="input_klus_type">
+                </div>
 
-        <form id="klusForm">
-            <!-- BOT CATCHER (HONEYPOT) -->
-            <input type="text" name="_gotcha" style="display:none">
-            <input type="hidden" name="gekozen_klus" id="input_klus_type">
-
-            <div id="pagina-details" class="page-section bg-white rounded-3xl shadow-xl p-8">
-                <h2 class="text-2xl font-bold mb-6 text-scout-green border-b pb-2 italic text-center">Details van de klus</h2>
-                <div class="space-y-5">
-                    <textarea name="omschrijving" rows="3" class="w-full border-2 p-4 rounded-2xl outline-none focus:border-green-500 shadow-inner" placeholder="Beschrijf de klus..." required></textarea>
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="date" name="datum" class="w-full border-2 p-4 rounded-2xl" required>
-                        <input type="text" name="tijd" placeholder="Tijdstip (bv. 14:00)" class="w-full border-2 p-4 rounded-2xl" required>
+                <!-- STAP 2: DETAILS -->
+                <div id="pagina-details" class="page-section">
+                    <h2 style="color: #077840;">Details van de klus</h2>
+                    <textarea name="omschrijving" rows="3" placeholder="Beschrijf de klus..." required></textarea>
+                    <div style="display:flex; gap:10px;">
+                        <input type="date" name="datum" required>
+                        <input type="text" name="tijd" placeholder="Tijdstip (bv. 14:00)" required>
                     </div>
-                    <input type="number" name="donatie" class="w-full border-2 border-orange-200 p-4 rounded-2xl focus:border-orange-500 shadow-inner" placeholder="Bijdrage (€)" required>
+                    <input type="number" name="donatie" placeholder="Bijdrage (€)" required>
+                    <div class="btn-row">
+                        <button type="button" onclick="showPage('pagina-keuze')" class="back-btn">Terug</button>
+                        <button type="button" onclick="showPage('pagina-contact')" class="next-btn">Volgende</button>
+                    </div>
                 </div>
-                <div class="flex gap-4 mt-8">
-                    <button type="button" onclick="showPage('pagina-keuze')" class="w-1/3 bg-gray-100 py-4 rounded-2xl font-bold">Terug</button>
-                    <button type="button" onclick="showPage('pagina-contact')" class="w-2/3 bg-scout-green text-white py-4 rounded-2xl font-bold shadow-md">Volgende</button>
-                </div>
-            </div>
 
-            <div id="pagina-contact" class="page-section bg-white rounded-3xl shadow-xl p-8">
-                <h2 class="text-2xl font-bold mb-6 text-scout-green border-b pb-2 italic text-center">Contactgegevens</h2>
-                <div class="space-y-4">
-                    <input type="text" name="naam" id="naam" placeholder="Naam (Verplicht)" class="w-full border-2 p-4 rounded-xl focus:border-green-500 outline-none" required>
-                    <input type="email" name="email" id="email" placeholder="E-mailadres" class="w-full border-2 p-4 rounded-xl focus:border-green-500 outline-none">
-                    <input type="tel" name="telefoon" id="tel" placeholder="Telefoonnummer" class="w-full border-2 p-4 rounded-xl focus:border-green-500 outline-none">
-                    <p id="error-contact" class="text-red-600 text-sm font-bold hidden text-center italic">⚠️ Vul e-mail of telefoonnummer in!</p>
+                <!-- STAP 3: CONTACT -->
+                <div id="pagina-contact" class="page-section">
+                    <h2 style="color: #077840;">Jouw gegevens</h2>
+                    <input type="text" name="naam" placeholder="Naam" required>
+                    <input type="email" name="email" placeholder="E-mailadres" required>
+                    <input type="text" name="telefoon" placeholder="Telefoonnummer">
+                    <div class="btn-row">
+                        <button type="button" onclick="showPage('pagina-details')" class="back-btn">Terug</button>
+                        <button type="submit" class="next-btn">Verstuur Aanmelding</button>
+                    </div>
                 </div>
-                <button type="submit" id="submitBtn" class="w-full bg-orange-500 text-white py-5 rounded-2xl font-bold shadow-lg mt-8 text-xl hover:bg-orange-600 transition-all">Verstuur Aanmelding! 🚀</button>
-            </div>
-        </form>
-    </div>
+
+            </form>
+        </div>
+    </section>
 
     <script>
-    function showPage(pageId) {
-        document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        window.scrollTo(0,0);
-    }
-
-    function selectKlus(type) {
-        document.getElementById('input_klus_type').value = type;
-        showPage('pagina-details');
-    }
-
-    const form = document.getElementById('klusForm');
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        
-        const btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        btn.innerText = "Bezig met verzenden...";
-
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const response = await fetch("https://submit-form.com/iuKUYiFj1", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                alert("✅ GELUKT! We hebben je aanvraag ontvangen.");
-                form.reset();
-                showPage('pagina-home');
-            } else {
-                const errorText = await response.text();
-                alert("❌ SERVER FOUT: " + errorText);
-            }
-        } catch (error) {
-            alert("❌ NETWERK FOUT: Check je internet of GitHub link.");
-            console.error(error);
-        } finally {
-            btn.disabled = false;
-            btn.innerText = "Verstuur Aanmelding! 🚀";
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.location.hash = 'actie'; // Houdt focus op het formulier
         }
-    });
-</script>
 
+        function selectKlus(klusNaam) {
+            document.getElementById('input_klus_type').value = klusNaam;
+            showPage('pagina-details');
+        }
+    </script>
+
+</body>
+</html>
