@@ -2,87 +2,91 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Denemarken Klusjesdag</title>
+    <title>Mijn Website - Denemarken Klusjesdag</title>
     <style>
+        /* Basisstijl */
         body { font-family: Arial, sans-serif; margin: 0; scroll-behavior: smooth; }
         
-        /* Navigatie */
-        nav { background: #333; padding: 1rem; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        /* Navigatie Menu */
+        nav { background: #333; padding: 15px; position: fixed; width: 100%; top: 0; z-index: 1000; text-align: center; }
+        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #28a745; }
 
-        /* Slideshow */
-        .slideshow-container { max-width: 800px; position: relative; margin: 80px auto 20px; height: 400px; overflow: hidden; border-radius: 10px; }
-        .slides { width: 100%; height: 100%; display: none; object-fit: cover; }
+        /* Slideshow Container */
+        .slideshow-container { max-width: 1000px; position: relative; margin: 80px auto 20px auto; height: 500px; overflow: hidden; }
+        .mySlides { width: 100%; height: 100%; display: none; object-fit: cover; border-radius: 10px; }
 
         /* Secties */
-        section { padding: 80px 20px; max-width: 800px; margin: auto; border-bottom: 1px solid #eee; }
-        
-        /* Formulier */
-        .actie-form { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; }
-        .actie-form input, .actie-form textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; }
-        .actie-form button { background: #28a745; color: white; padding: 12px 20px; border: none; cursor: pointer; font-size: 16px; border-radius: 5px; }
-        .actie-form button:hover { background: #218838; }
+        section { padding: 100px 20px; max-width: 800px; margin: auto; }
+        #over-ons { background-color: #f4f4f4; }
+
+        /* Denemarken Actie Formulier */
+        .actie-container { background: #fff; padding: 30px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .actie-container h2 { color: #d63031; }
+        .actie-form input, .actie-form textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .actie-form button { background: #d63031; color: white; padding: 15px; border: none; width: 100%; cursor: pointer; font-size: 18px; border-radius: 4px; }
+        .actie-form button:hover { background: #b32424; }
     </style>
 </head>
 <body>
 
+<!-- Navigatie met werkende knoppen -->
 <nav>
     <a href="#home">Home</a>
     <a href="#over-ons">Over Ons</a>
     <a href="#actie">Denemarken Actie</a>
 </nav>
 
+<!-- Slideshow (Voeg hieronder simpelweg extra <img> tags toe) -->
 <div id="home" class="slideshow-container">
-    <!-- Voeg hier meer foto's toe -->
-    <img class="slides" src="foto1.jpg" alt="Foto 1">
-    <img class="slides" src="foto2.jpg" alt="Foto 2">
-    <img class="slides" src="foto3.jpg" alt="Foto 3">
-    <img class="slides" src="foto4.jpg" alt="Foto 4">
+    <img class="mySlides" src="foto1.jpg" alt="Foto 1">
+    <img class="mySlides" src="foto2.jpg" alt="Foto 2">
+    <img class="mySlides" src="foto3.jpg" alt="Foto 3">
+    <img class="mySlides" src="foto4.jpg" alt="Foto 4">
+    <img class="mySlides" src="foto5.jpg" alt="Foto 5">
 </div>
 
+<!-- Over Ons Sectie -->
 <section id="over-ons">
     <h1>Over Ons</h1>
-    <p>Welkom bij ons project! Hier kun je informatie vinden over wie we zijn en wat we doen.</p>
+    <p>Hier komt de tekst over jullie organisatie of project. De knop in het menu stuurt je direct hierheen.</p>
 </section>
 
+<!-- Denemarken Klusjesdag Actie Pagina -->
 <section id="actie">
-    <h1>Actie: Denemarken Klusjesdag</h1>
-    <p>Meld je hieronder aan voor de Denemarken klusjesdag actie! Vul al je gegevens in om deel te nemen.</p>
-    
-    <div class="actie-form">
-        <form action="#" method="POST">
-            <label for="naam">Volledige Naam*</label>
-            <input type="text" id="naam" name="naam" required placeholder="Je naam...">
-
-            <label for="email">E-mailadres*</label>
-            <input type="email" id="email" name="email" required placeholder="Je e-mail...">
-
-            <label for="telefoon">Telefoonnummer</label>
-            <input type="tel" id="telefoon" name="telefoon" placeholder="Je telefoonnummer...">
-
-            <label for="klus">Welke klus wil je doen?</label>
-            <textarea id="klus" name="klus" rows="4" placeholder="Beschrijf kort je ervaring of interesse..."></textarea>
-
-            <button type="submit">Aanmelden voor Actie</button>
+    <div class="actie-container">
+        <h2>Actie: Denemarken Klusjesdag</h2>
+        <p>Meld je aan voor de klusjesdag in Denemarken. Vul het onderstaande formulier volledig in.</p>
+        
+        <form class="actie-form" action="#" method="POST">
+            <input type="text" name="volledige_naam" placeholder="Volledige Naam" required>
+            <input type="email" name="email" placeholder="E-mailadres" required>
+            <input type="text" name="telefoon" placeholder="Telefoonnummer">
+            <input type="text" name="adres" placeholder="Straat en Huisnummer">
+            <input type="text" name="postcode" placeholder="Postcode">
+            <input type="text" name="woonplaats" placeholder="Woonplaats">
+            <textarea name="opmerkingen" rows="5" placeholder="Welke specifieke klussen kun je uitvoeren?"></textarea>
+            
+            <button type="submit">Aanmelden voor Klusjesdag</button>
         </form>
     </div>
 </section>
 
 <script>
-    // Slideshow logica
-    let slideIndex = 0;
-    showSlides();
+    // Automatische Slideshow Logica
+    var slideIndex = 0;
+    showCarousel();
 
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("slides");
+    function showCarousel() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";  
         }
         slideIndex++;
         if (slideIndex > slides.length) {slideIndex = 1}    
         slides[slideIndex-1].style.display = "block";  
-        setTimeout(showSlides, 3000); // Wisselt elke 3 seconden
+        setTimeout(showCarousel, 3000); // Wisselt elke 3 seconden
     }
 </script>
 
