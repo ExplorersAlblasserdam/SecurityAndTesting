@@ -8,159 +8,163 @@
         /* ALGEMENE STIJL */
         body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #333; scroll-behavior: smooth; background-color: #fcfcfc; }
         
-        /* NAVIGATIE MET DROPDOWN */
+        /* NAVIGATIE */
         nav { background: #077840; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
         nav a, .dropbtn { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; cursor: pointer; background: none; border: none; font-size: 16px; }
-        
         .dropdown { display: inline-block; position: relative; }
-        .dropdown-content { 
-            display: none; position: absolute; background-color: #fff; min-width: 180px; 
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; border-radius: 8px; overflow: hidden; top: 100%; left: 50%; transform: translateX(-50%);
-        }
+        .dropdown-content { display: none; position: absolute; background-color: #fff; min-width: 180px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; border-radius: 8px; overflow: hidden; top: 100%; left: 50%; transform: translateX(-50%); }
         .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; margin: 0; text-align: left; }
         .dropdown-content a:hover { background-color: #f1f1f1; color: #077840; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* PAGINA BEHEER */
         .page { display: none; }
         .page.active { display: block; }
 
-        /* 1. SLIDESHOW (HOME) */
+        /* HOME SLIDESHOW */
         .welcome-section { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden; color: white; text-align: center; }
         .bg-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-size: cover; background-position: center; animation: backgroundRotate 25s infinite; }
         .welcome-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2; }
         .welcome-content { position: relative; z-index: 3; }
-        
-        @keyframes backgroundRotate {
-            0%, 18% { background-image: url('foto1.jpg'); }
-            20%, 38% { background-image: url('foto2.jpg'); }
-            40%, 58% { background-image: url('foto3.jpg'); }
-            60%, 100% { background-image: url('foto1.jpg'); }
-        }
+        @keyframes backgroundRotate { 0%, 18% { background-image: url('foto1.jpg'); } 20%, 38% { background-image: url('foto2.jpg'); } 40%, 58% { background-image: url('foto3.jpg'); } 60%, 100% { background-image: url('foto1.jpg'); } }
 
-        /* 2. LOOPENDE ACTIES STIJL */
+        /* DONEER KNOP HOME */
+        .donate-container { padding: 80px 20px; text-align: center; background: white; }
+        .big-donate-btn { 
+            display: inline-block; padding: 25px 50px; background: #ff7d31; color: white; 
+            text-decoration: none; font-size: 24px; font-weight: bold; border-radius: 50px; 
+            box-shadow: 0 10px 20px rgba(255,125,49,0.3); transition: transform 0.3s; 
+        }
+        .big-donate-btn:hover { transform: scale(1.05); background: #e66a20; }
+
+        /* LOOPENDE ACTIES */
         .actie-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 40px; }
-        .actie-card { background: white; width: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; }
+        .actie-card { background: white; width: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .actie-header { background: #ff7d31; padding: 12px; color: white; font-weight: bold; text-align: center; text-transform: uppercase; }
         .actie-body { padding: 30px; }
         .opbrengst-teller { background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 10px; font-weight: bold; margin-bottom: 15px; border: 1px solid #c8e6c9; text-align: center; }
-        .aanmeld-btn { background: #1b5e20; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        /* 3. EERDERE ACTIES STIJL (HOVER EFFECT) */
+        /* EERDERE ACTIES (GEBLEVEN ZOALS HET WAS) */
         .archive-container { padding: 60px 20px; text-align: center; }
-        .archive-card { 
-            background: white; width: 450px; margin: 20px auto; border-radius: 25px; 
-            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-            max-height: 100px; /* Beginhoogte */
-            cursor: pointer;
-        }
+        .archive-card { background: white; width: 450px; margin: 20px auto; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); max-height: 100px; cursor: pointer; }
         .archive-card:hover { max-height: 800px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        
         .archive-banner { background: #077840; color: white; padding: 35px; font-weight: bold; font-size: 1.2em; }
-        
-        /* Slideshow binnen het kader */
-        .archive-slideshow { 
-            width: 100%; height: 250px; background-size: cover; background-position: center;
-            animation: archiveSlide 12s infinite; 
-        }
-        @keyframes archiveSlide {
-            0%, 30% { background-image: url('kamp-foto1.jpg'); }
-            33%, 63% { background-image: url('kamp-foto2.jpg'); }
-            66%, 100% { background-image: url('kamp-foto3.jpg'); }
-        }
-
+        .archive-slideshow { width: 100%; height: 250px; background-size: cover; background-position: center; animation: archiveSlide 12s infinite; }
+        @keyframes archiveSlide { 0%, 30% { background-image: url('kamp-foto1.jpg'); } 33%, 63% { background-image: url('kamp-foto2.jpg'); } 66%, 100% { background-image: url('kamp-foto3.jpg'); } }
         .archive-text { padding: 30px; text-align: left; line-height: 1.6; border-top: 1px solid #eee; }
 
-        /* FORMULIER GEDEELTE (EERDERE CODE) */
-        .form-page-container { display: none; padding: 60px 20px; background: #f9f9f9; min-height: 80vh; }
-        body.showing-form .page, body.showing-form .main-content { display: none; }
-        body.showing-form .form-page-container { display: block; }
+        /* FORMULIER STIJL */
+        .form-step { display: none; padding: 20px; }
+        .form-step.active { display: block; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        .btn-next { background: #077840; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a onclick="showPage('home')">Home</a>
-        <div class="dropdown">
-            <button class="dropbtn">Acties ▼</button>
-            <div class="dropdown-content">
-                <a onclick="showPage('lopende-acties')">Lopende Acties</a>
-                <a onclick="showPage('eerdere-acties')">Eerdere Acties</a>
+<nav>
+    <a onclick="showPage('home')">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Acties ▼</button>
+        <div class="dropdown-content">
+            <a onclick="showPage('lopende-acties')">Lopende Acties</a>
+            <a onclick="showPage('eerdere-acties')">Eerdere Acties</a>
+        </div>
+    </div>
+    <a href="https://scoutingalblasserdam.nl" target="_blank">Scouting Site</a>
+</nav>
+
+<!-- HOME PAGINA -->
+<div id="home" class="page active">
+    <section class="welcome-section">
+        <div class="bg-slider"></div>
+        <div class="welcome-overlay"></div>
+        <div class="welcome-content">
+            <h1>Welkom bij de Explorers</h1>
+            <p>Scouting Alblasserdam - Durf jij het avontuur aan?</p>
+        </div>
+    </section>
+
+    <section class="donate-container">
+        <h2>Steun onze reis naar Denemarken</h2>
+        <p>Wil je ons direct helpen? Elke bijdrage is welkom!</p><br>
+        <a href="https://betaalverzoek.rabobank.nl" target="_blank" class="big-donate-btn">DONEREN 🧡</a>
+    </section>
+</div>
+
+<!-- LOOPENDE ACTIES -->
+<div id="lopende-acties" class="page">
+    <section class="actie-grid">
+        <div class="actie-card">
+            <div class="actie-header">Zomerkamp 2026</div>
+            <div class="actie-body">
+                <div class="opbrengst-teller">💰 Opgehaald: € 450,00</div>
+                <h3>⚙️ Klusjesactie</h3>
+                <p>Meld hier je klusje aan:</p>
+                
+                <div id="multi-step-form">
+                    <!-- Stap 1 -->
+                    <div class="form-step active" id="step1">
+                        <input type="text" id="naam" placeholder="Je Naam" required>
+                        <input type="text" id="adres" placeholder="Straat + Huisnummer" required>
+                        <button class="btn-next" onclick="nextStep(2)">Volgende</button>
+                    </div>
+                    <!-- Stap 2 -->
+                    <div class="form-step" id="step2">
+                        <select id="klus">
+                            <option value="tuin">Tuinonderhoud</option>
+                            <option value="schoonmaak">Schoonmaken</option>
+                            <option value="anders">Iets anders...</option>
+                        </select>
+                        <textarea id="toelichting" placeholder="Korte omschrijving van de klus..."></textarea>
+                        <button class="btn-next" onclick="nextStep(3)">Aanmelding Verzenden</button>
+                    </div>
+                    <!-- Stap 3 -->
+                    <div class="form-step" id="step3">
+                        <p style="color: green; font-weight: bold; text-align: center;">✅ Bedankt! We nemen snel contact met je op.</p>
+                        <button class="btn-next" onclick="resetForm()">Nog een klus?</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <a href="https://scoutingalblasserdam.nl" target="_blank">Scouting Site</a>
-    </nav>
+    </section>
+</div>
 
-    <!-- HOME PAGINA -->
-    <div id="home" class="page active">
-        <section class="welcome-section">
-            <div class="bg-slider"></div>
-            <div class="welcome-overlay"></div>
-            <div class="welcome-content">
-                <h1>Welkom bij de Explorers</h1>
-                <p>Scouting Alblasserdam - Durf jij het avontuur aan?</p>
+<!-- EERDERE ACTIES -->
+<div id="eerdere-acties" class="page">
+    <section class="archive-container">
+        <h2 style="color: #077840;">Onze Resultaten</h2>
+        <div class="archive-card">
+            <div class="archive-banner">Klusjesactie Denemarken (Vorige editie)</div>
+            <div class="archive-slideshow"></div>
+            <div class="archive-text">
+                <h3>Wat hebben we gedaan?</h3>
+                <p>Met de fantastische opbrengst van onze vorige klusjesactie zijn we op zomerkamp naar Denemarken gegaan. Dankzij jullie hulp hebben we een onvergetelijke reis kunnen maken.</p>
+                <p><strong>Resultaat:</strong> € 1.250,- opgehaald!</p>
             </div>
-        </section>
-        <section style="padding: 100px 20px; text-align: center; background: white;">
-            <h2>Steun onze projecten</h2>
-            <p>Bekijk onze acties in het menu om te zien hoe je ons kunt helpen.</p>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 
-    <!-- LOOPENDE ACTIES -->
-    <div id="lopende-acties" class="page">
-        <section class="actie-grid">
-            <div class="actie-card">
-                <div class="actie-header">Zomerkamp Denemarken 2026</div>
-                <div class="actie-body">
-                    <!-- Handmatige opbrengst teller -->
-                    <div class="opbrengst-teller">💰 Opgehaald: € 450,00</div>
-                    <h3>⚙️ Klusjesactie 2026</h3>
-                    <p>Hulp nodig in de tuin of bij de schoonmaak? De Explorers steken graag de handen uit de mouwen!</p>
-                    <button onclick="startAanmelding()" class="aanmeld-btn">Klusje Aanmelden</button>
-                </div>
-            </div>
-        </section>
-    </div>
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
 
-    <!-- EERDERE ACTIES -->
-    <div id="eerdere-acties" class="page">
-        <section class="archive-container">
-            <h2 style="color: #077840;">Onze Resultaten</h2>
-            
-            <div class="archive-card">
-                <div class="archive-banner">Klusjesactie Denemarken (Vorige editie)</div>
-                <div class="archive-slideshow"></div>
-                <div class="archive-text">
-                    <h3>Wat hebben we gedaan?</h3>
-                    <p>Met de fantastische opbrengst van onze vorige klusjesactie zijn we op zomerkamp naar Denemarken gegaan. Dankzij jullie hulp hebben we een onvergetelijke reis kunnen maken vol uitdagende hikes en kampvuren.</p>
-                    <p><strong>Resultaat:</strong> € 1.250,- opgehaald voor het vervoer en de activiteiten!</p>
-                </div>
-            </div>
-        </section>
-    </div>
+    function nextStep(step) {
+        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+    }
 
-    <!-- FORMULIER PAGINA -->
-    <div id="form-container" class="form-page-container">
-        <!-- Hier komt je stapsgewijze formulier uit de vorige code -->
-        <center><h2>Aanmeldformulier</h2><p>(Hier staat je werkende formulier)</p>
-        <button onclick="showPage('home')" class="aanmeld-btn" style="max-width: 200px;">Terug naar home</button></center>
-    </div>
-
-    <script>
-        function showPage(pageId) {
-            document.body.classList.remove('showing-form');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function startAanmelding() {
-            document.body.classList.add('showing-form');
-            window.scrollTo(0, 0);
-        }
-    </script>
+    function resetForm() {
+        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('naam').value = '';
+        document.getElementById('adres').value = '';
+        document.getElementById('toelichting').value = '';
+    }
+</script>
 
 </body>
 </html>
