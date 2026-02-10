@@ -153,59 +153,73 @@
     
 <!-- HET NIEUWE FORMULIER (4 STAPPEN) -->
 <div id="form-container" class="form-container">
-    
-    <!-- De 'onzichtbare' form-tag die de layout niet breekt -->
-    <form action="https://submit-form.com/iuKUYiFj1" method="POST" style="display: contents;">
+  <div class="form-card">
         
-        <!-- Optioneel: Stuur de klant na verzenden naar een eigen bedankpagina -->
-        <!-- <input type="hidden" name="_redirect" value="https://jouwsite.nl" /> -->
+        <!-- Stap 1: Start -->
+        <div class="form-step active" id="step1">
+            <h2>KLUSJESACTIE DENEMARKEN <span style="color:#077840">DK</span></h2>
+            <p>Wij sparen voor ons kamp naar Denemarken. In ruil voor een donatie komen wij langs om een klusje bij u te klaren. U bepaalt zelf het bedrag!</p>
+            <button class="btn-green" onclick="nextStep(2)" style="padding: 20px;">Start Aanmelding</button>
+            <a onclick="showPage('home')" class="btn-back">Terug naar start</a>
+        </div>
 
-        <div class="form-card">
-            <!-- STAP 1 -->
-            <div class="form-step active" id="step-1">
-                <h2>Stap 1: Persoonlijke gegevens</h2>
-                <input type="text" name="volledige_naam" placeholder="Naam" required />
-                <input type="email" name="email_adres" placeholder="E-mail" required />
-                <button type="button" class="next-btn" onclick="nextStep(2)">Volgende</button>
+        <!-- Stap 2: Wat kunnen we doen? -->
+        <div class="form-step" id="step2">
+            <h3 style="color:#077840; margin-bottom:20px;">Wat kunnen we doen?</h3>
+            <div style="border-top: 1px solid #eee; padding-top:20px;">
+                <button class="optie-btn" onclick="nextStep(3)">🌲 Tuinieren</button>
+                <button class="optie-btn" onclick="nextStep(3)">🪄 Schoonmaken</button>
+                <button class="optie-btn" onclick="nextStep(3)">🛒 Boodschappen</button>
+                <button class="optie-btn" onclick="nextStep(3)">✨ Iets anders...</button>
             </div>
+            <a onclick="nextStep(1)" class="btn-back" style="text-align: left;">← Vorige stap</a>
+        </div>
 
-            <!-- STAP 2 -->
-            <div class="form-step" id="step-2" style="display:none;">
-                <h2>Stap 2: Details</h2>
-                <input type="text" name="onderwerp" placeholder="Onderwerp" />
-                <button type="button" class="prev-btn" onclick="nextStep(1)">Terug</button>
-                <button type="button" class="next-btn" onclick="nextStep(3)">Volgende</button>
+        <!-- Stap 3: Details -->
+        <div class="form-step" id="step3">
+            <h3 style="color:#077840; margin-bottom:20px;">Details van de klus</h3>
+            <textarea placeholder="Beschrijf de klus..."></textarea>
+            <div class="row">
+                <input type="date">
+                <input type="text" placeholder="Tijdstip (bv. 14:00)">
             </div>
-
-            <!-- STAP 3 -->
-            <div class="form-step" id="step-3" style="display:none;">
-                <h2>Stap 3: Uw bericht</h2>
-                <textarea name="bericht" placeholder="Typ hier je bericht..." required></textarea>
-                <button type="button" class="prev-btn" onclick="nextStep(2)">Terug</button>
-                <button type="button" class="next-btn" onclick="nextStep(4)">Laatste stap</button>
-            </div>
-
-            <!-- STAP 4 (VERZENDEN) -->
-            <div class="form-step" id="step-4" style="display:none;">
-                <h2>Stap 4: Bevestigen</h2>
-                <p>Controleer je gegevens en klik op verzenden.</p>
-                <button type="button" class="prev-btn" onclick="nextStep(3)">Terug</button>
-                <!-- Deze knop MOET type="submit" zijn voor Formspark -->
-                <button type="submit" class="submit-btn">Verzenden</button>
+            <input type="text" placeholder="Bijdrage (€)" style="border: 1px solid #ffd8bc;">
+            <div class="row-btns">
+                <button class="btn-light" onclick="nextStep(2)">Terug</button>
+                <button class="btn-green-next" onclick="nextStep(4)">Volgende</button>
             </div>
         </div>
 
-    </form>
+        <!-- Stap 4: Contact -->
+        <div class="form-step" id="step4">
+            <h3 style="color:#077840; margin-bottom:20px;">Contactgegevens</h3>
+            <input type="text" placeholder="Naam (Verplicht)">
+            <input type="email" placeholder="E-mailadres">
+            <input type="tel" placeholder="Telefoonnummer">
+            <button class="btn-orange" onclick="alert('Aanmelding verzonden!'); showPage('home')">Verstuur Aanmelding! 🚀</button>
+        </div>
+
+    </div>
 </div>
 
 <script>
-    // Simpele functie voor het wisselen tussen de stappen
-    function nextStep(stepNumber) {
-        // Verberg alle stappen
-        document.querySelectorAll('.form-step').forEach(step => {
-            step.style.display = 'none';
-        });
-        // Toon de gevraagde stap
-        document.getElementById('step-' + stepNumber).style.display = 'block';
+    function showPage(pageId) {
+        document.body.classList.remove('showing-form');
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function startForm() {
+        document.body.classList.add('showing-form');
+        nextStep(1);
+    }
+
+    function nextStep(step) {
+        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
     }
 </script>
+
+</body>
+</html>
