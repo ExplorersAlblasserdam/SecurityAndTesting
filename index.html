@@ -152,14 +152,19 @@
 </div>
 
 <div id="form-container" class="form-container">
-  <div class="form-card">
-    <!-- Voeg hier het formulier toe met jouw unieke ID -->
-    <form action="https://submit-form.com/iuKUYiFj1">
-      <!-- Je input velden komen hier -->
-      <input type="text" name="naam" required />
-      <button type="submit">Verzenden</button>
-    </form>
-  </div>
+  <!-- De 'form' tag krijgt nu dezelfde classes als de kaart voor behoud van layout -->
+  <form action="https://submit-form.com/iuKUYiFj1" method="POST" class="form-card" style="display: flex; flex-direction: column; gap: 15px;">
+    
+    <!-- Voorbeeld van een invoerveld -->
+    <label for="name">Naam</label>
+    <input type="text" id="name" name="name" placeholder="Je naam" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <!-- De verzendknop -->
+    <button type="submit" style="cursor: pointer; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
+      Verzenden
+    </button>
+    
+  </form>
 </div>
 
         
@@ -231,5 +236,6 @@
 
 </body>
 </html>
+
 
 
